@@ -29,11 +29,12 @@ CREATE TABLE casa_hogwarts(
     id SERIAL PRIMARY KEY,
     nome VARCHAR(30),
     pontuacao INT,
-    cod_professor REFERENCES professor (id)
+    cod_professor INT REFERENCES professor (id)
 );
 
 CREATE TABLE aluno(
-    matricula INT PRIMARY KEY,
+    matricula INT GENERATED ALWAYS AS IDENTITY
+        (START WITH 10000 INCREMENT BY 1) PRIMARY KEY,
     nome VARCHAR(70),
     cpf CHAR(14) NOT NULL UNIQUE CHECK (cpf ~ '^\d{3}\.\d{3}\.\d{3}\-\d{2}$'),
     email VARCHAR(50) UNIQUE NOT NULL,
@@ -44,16 +45,14 @@ CREATE TABLE aluno(
 CREATE TABLE observacao(
     id SERIAL PRIMARY KEY,
     observacao TEXT NOT NULL,
-    cod_aluno INT REFERENCES aluno (id),
+    cod_aluno INT REFERENCES aluno (matricula),
     cod_disciplina INT REFERENCES disciplina (id)
 );
 
 CREATE TABLE nota(
     id SERIAL PRIMARY KEY,
-    nota NUMERIC(10,2) NOT NULL,
-    cod_aluno INT REFERENCES aluno (id),
+    nota_um NUMERIC(10,2) NOT NULL,
+    nota_dois NUMERIC(10,2) NOT NULL,
+    cod_aluno INT REFERENCES aluno (matricula),
     cod_disciplina INT REFERENCES disciplina (id)
 );
-
--- Altera a matrícula para começar do 10000
-SELECT 
