@@ -2,7 +2,7 @@
 
 ---
 
-Este projeto contém o schema para criação e populamento de um **banco de dados PostgreSQL** que gerencia Hogwarts, alunos, professores, notas e observações.
+Este projeto contém o schema para criação e populamento de um **banco de dados PostgreSQL** que gerencia Hogwarts, alunos, professores, notas e observações. Também possui as views necessárias para o funcionamento e um dataload simples para primeiras consultas.
 
 ---
 
